@@ -28,24 +28,6 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Stats - cubist offset boxes */}
-        <div className="flex gap-12 mb-10 text-sm">
-          <div className="relative">
-            <div className="absolute -left-2 -top-2 w-full h-full border border-zinc-800" />
-            <div className="relative bg-[#09090b] px-4 py-3 border border-zinc-700">
-              <div className="text-white font-mono">~700ms</div>
-              <div className="text-zinc-600 text-xs mt-0.5">end-to-end</div>
-            </div>
-          </div>
-          <div className="relative">
-            <div className="absolute -left-2 -top-2 w-full h-full border border-zinc-800" />
-            <div className="relative bg-[#09090b] px-4 py-3 border border-zinc-700">
-              <div className="text-white font-mono">1 call</div>
-              <div className="text-zinc-600 text-xs mt-0.5">vs 3-10+ traditional</div>
-            </div>
-          </div>
-        </div>
-
         {/* Demo */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
