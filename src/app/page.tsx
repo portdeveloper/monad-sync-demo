@@ -8,69 +8,151 @@ export default function Home() {
   const [showCode, setShowCode] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-zinc-100">
-      <div className="max-w-2xl mx-auto px-6 py-4">
+    <div className="min-h-screen grid-overlay">
+      <div className="max-w-3xl mx-auto px-8 py-12">
         {/* Header */}
-        <div className="mb-10">
-          <div className="flex items-center gap-2 mb-3">
-            <h1 className="text-3xl font-medium tracking-tight text-white">
-              eth_sendRawTransactionSync
-            </h1>
-            <span className="text-xs text-zinc-500 border border-zinc-800 px-2 py-0.5 rounded">
-              Monad Mainnet
-            </span>
-          </div>
-          <p className="text-zinc-500 text-base">
+        <div className="mb-6">
+          <div className="badge-purple mb-6">RPC Method</div>
+          <h1 className="text-4xl font-semibold tracking-tight mb-4"
+            style={{ color: 'var(--text-primary)' }}>
+            eth_sendRawTransactionSync
+          </h1>
+          <p style={{ color: 'var(--text-secondary)' }} className="text-lg">
             Send a transaction and get the receipt in one call. No polling.
           </p>
-          <p className="text-zinc-600 text-sm mt-3">
-            Not pre-confirmation from a sequencer. Actual tx finality, fetched from voted state.
+          <p style={{ color: 'var(--text-muted)' }} className="text-sm mt-3">
+            Not a sequencer pre-confirmation. The receipt comes from proposed state, with real execution results.
           </p>
         </div>
 
+        {/* Stripe divider */}
+        <div className="stripe-divider my-10" />
+
         {/* Demo */}
-        <div className="mb-8">
+        <div className="mb-10">
           <div className="flex items-center justify-between mb-6">
-            <span className="text-xs text-zinc-600 uppercase tracking-wider">Try it</span>
+            <div className="badge-purple">Try it</div>
             <button
               onClick={() => setShowCode(!showCode)}
-              className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors"
+              className="text-xs font-mono transition-colors"
+              style={{ color: showCode ? 'var(--accent-purple)' : 'var(--text-muted)' }}
             >
-              {showCode ? "hide code" : "view code"}
+              {showCode ? "[ hide code ]" : "[ view code ]"}
             </button>
           </div>
-          <LiveDemo />
+          <div className="monad-card p-6">
+            <LiveDemo />
+          </div>
         </div>
 
         {/* Code */}
         {showCode && (
-          <div className="mb-8">
+          <div className="mb-10">
             <CodeComparison />
           </div>
         )}
 
+        {/* Stripe divider */}
+        <div className="stripe-divider my-10" />
+
         {/* Why */}
-        <div className="pt-8 border-t border-zinc-900">
-          <span className="text-xs text-zinc-600 uppercase tracking-wider">Why</span>
-          <div className="mt-6 grid grid-cols-2 gap-x-8 gap-y-4 text-sm">
-            <div>
-              <div className="text-zinc-400">Simpler code</div>
-              <div className="text-zinc-600 text-xs mt-1">One call, no polling loop or retry logic</div>
-            </div>
-            <div>
-              <div className="text-zinc-400">Atomic confirmation</div>
-              <div className="text-zinc-600 text-xs mt-1">Know tx succeeded before your function returns</div>
-            </div>
-            <div>
-              <div className="text-zinc-400">Fewer RPC calls</div>
-              <div className="text-zinc-600 text-xs mt-1">1 call vs 3-10+, less rate limiting risk</div>
-            </div>
-            <div>
-              <div className="text-zinc-400">Real finality</div>
-              <div className="text-zinc-600 text-xs mt-1">Not a sequencer promise, actual voted state</div>
-            </div>
+        <div>
+          <div className="badge-purple mb-8">Why</div>
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { title: "Simpler code", desc: "One call, no polling loop or retry logic" },
+              { title: "Atomic confirmation", desc: "Know tx succeeded before your function returns" },
+              { title: "Fewer RPC calls", desc: "1 call vs 3-10+, less rate limiting risk" },
+              { title: "Real execution", desc: "Not a sequencer promise, actual execution result" },
+            ].map((item) => (
+              <div key={item.title} className="monad-card p-5">
+                <div className="relative z-10">
+                  <div className="text-sm font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
+                    {item.title}
+                  </div>
+                  <div className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                    {item.desc}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+
+        {/* Stripe divider */}
+        <div className="stripe-divider my-10" />
+
+        {/* How blocks work */}
+        <div>
+          <div className="badge-purple mb-8">How Monad blocks work</div>
+
+          <div className="monad-card p-6 mb-6">
+            <div className="relative z-10">
+              {/* Pipeline */}
+              <div className="flex items-center gap-4 text-sm font-mono mb-6">
+                <span className="px-3 py-1.5 border" style={{
+                  color: 'var(--accent-purple)',
+                  borderColor: 'var(--accent-purple-dim)',
+                  background: 'rgba(124, 108, 255, 0.05)'
+                }}>
+                  Proposed
+                </span>
+                <span style={{ color: 'var(--text-dim)' }}>→</span>
+                <span className="px-3 py-1.5 border" style={{
+                  color: 'var(--text-secondary)',
+                  borderColor: 'var(--border-medium)'
+                }}>
+                  Voted
+                </span>
+                <span style={{ color: 'var(--text-dim)' }}>→</span>
+                <span className="px-3 py-1.5 border" style={{
+                  color: 'var(--text-muted)',
+                  borderColor: 'var(--border-subtle)'
+                }}>
+                  Finalized
+                </span>
+              </div>
+
+              <p className="text-xs leading-relaxed mb-6" style={{ color: 'var(--text-muted)' }}>
+                Each block moves through three stages, ~400ms apart.
+                Since v0.13.0, the{" "}
+                <code style={{ color: 'var(--text-secondary)' }}>latest</code>{" "}
+                block tag returns data from{" "}
+                <span style={{ color: 'var(--accent-purple)' }}>Proposed</span>{" "}
+                blocks instead of Voted — so all RPC queries see new state ~400ms sooner.
+              </p>
+
+              {/* Method comparison */}
+              <div className="space-y-3">
+                <div className="flex gap-4 text-xs">
+                  <span className="font-mono w-28 shrink-0" style={{ color: 'var(--text-muted)' }}>
+                    traditional
+                  </span>
+                  <span style={{ color: 'var(--text-secondary)' }}>
+                    Polls <code style={{ color: 'var(--text-muted)' }}>latest</code> for the receipt.
+                    Now faster because <code style={{ color: 'var(--text-muted)' }}>latest</code> returns proposed blocks.
+                  </span>
+                </div>
+                <div className="flex gap-4 text-xs">
+                  <span className="font-mono w-28 shrink-0" style={{ color: 'var(--accent-purple)' }}>
+                    sync
+                  </span>
+                  <span style={{ color: 'var(--text-secondary)' }}>
+                    Waits server-side and returns the receipt in the same call.
+                    Skips polling entirely — still fewer round-trips.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-xs font-mono" style={{ color: 'var(--text-dim)' }}>
+            Tradeoff: proposed blocks have a tiny reorg risk vs finalized. In practice, negligible.
+          </p>
+        </div>
+
+        {/* Footer spacer */}
+        <div className="h-16" />
       </div>
     </div>
   );

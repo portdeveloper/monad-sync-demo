@@ -16,22 +16,24 @@ const receipt = await walletClient.sendRawTransactionSync({
 
 export function CodeComparison() {
   return (
-    <div className="space-y-8">
-      <div className="relative">
-        <div className="absolute -left-3 -top-3 w-full h-full border border-zinc-800" />
-        <div className="relative bg-[#09090b] border border-zinc-800 p-4">
-          <div className="text-xs text-zinc-600 mb-3">traditional</div>
-          <pre className="text-xs text-zinc-400 font-mono leading-relaxed overflow-x-auto">
+    <div className="space-y-6">
+      <div className="monad-card p-5">
+        <div className="relative z-10">
+          <div className="text-xs font-mono mb-4" style={{ color: 'var(--text-dim)' }}>
+            traditional
+          </div>
+          <pre className="text-xs font-mono leading-relaxed overflow-x-auto" style={{ color: 'var(--text-muted)' }}>
             {traditionalCode}
           </pre>
         </div>
       </div>
 
-      <div className="relative">
-        <div className="absolute -left-3 -top-3 w-full h-full border border-zinc-700" />
-        <div className="relative bg-[#09090b] border border-zinc-700 p-4">
-          <div className="text-xs text-zinc-500 mb-3">sync</div>
-          <pre className="text-xs text-zinc-300 font-mono leading-relaxed overflow-x-auto">
+      <div className="monad-card p-5" style={{ borderColor: 'var(--accent-purple-dim)' }}>
+        <div className="relative z-10">
+          <div className="text-xs font-mono mb-4" style={{ color: 'var(--accent-purple)' }}>
+            sync
+          </div>
+          <pre className="text-xs font-mono leading-relaxed overflow-x-auto" style={{ color: 'var(--text-secondary)' }}>
             {syncCode}
           </pre>
         </div>
