@@ -28,65 +28,11 @@ export default function Home() {
         {/* Stripe divider */}
         <div className="stripe-divider my-10" />
 
-        {/* Demo */}
-        <div className="mb-10">
-          <div className="flex items-center justify-between mb-6">
-            <div className="badge-purple">Try it</div>
-            <button
-              onClick={() => setShowCode(!showCode)}
-              className="text-xs font-mono transition-colors"
-              style={{ color: showCode ? 'var(--accent-purple)' : 'var(--text-muted)' }}
-            >
-              {showCode ? "[ hide code ]" : "[ view code ]"}
-            </button>
-          </div>
-          <div className="monad-card p-6">
-            <LiveDemo />
-          </div>
-        </div>
-
-        {/* Code */}
-        {showCode && (
-          <div className="mb-10">
-            <CodeComparison />
-          </div>
-        )}
-
-        {/* Stripe divider */}
-        <div className="stripe-divider my-10" />
-
-        {/* Why */}
-        <div>
-          <div className="badge-purple mb-8">Why</div>
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { title: "Simpler code", desc: "One call, no polling loop or retry logic" },
-              { title: "Atomic confirmation", desc: "Know tx succeeded before your function returns" },
-              { title: "Fewer RPC calls", desc: "1 call vs 3-10+, less rate limiting risk" },
-              { title: "Real execution", desc: "Not a sequencer promise, actual execution result" },
-            ].map((item) => (
-              <div key={item.title} className="monad-card p-5">
-                <div className="relative z-10">
-                  <div className="text-sm font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-                    {item.title}
-                  </div>
-                  <div className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                    {item.desc}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Stripe divider */}
-        <div className="stripe-divider my-10" />
-
         {/* How blocks work */}
-        <div>
-          <div className="badge-purple mb-8">How Monad blocks work</div>
+        <div className="mb-10">
+          <div className="badge-purple mb-4">How Monad blocks work</div>
 
-          <div className="monad-card p-6 mb-6">
+          <div className="monad-card p-6 mb-3">
             <div className="relative z-10">
               {/* Pipeline */}
               <div className="flex items-center gap-4 text-sm font-mono mb-6">
@@ -149,6 +95,60 @@ export default function Home() {
           <p className="text-xs font-mono" style={{ color: 'var(--text-dim)' }}>
             Tradeoff: proposed blocks have a tiny reorg risk vs finalized. In practice, negligible.
           </p>
+        </div>
+
+        {/* Stripe divider */}
+        <div className="stripe-divider my-10" />
+
+        {/* Demo */}
+        <div className="mb-10">
+          <div className="flex items-center justify-between mb-6">
+            <div className="badge-purple">Try it</div>
+            <button
+              onClick={() => setShowCode(!showCode)}
+              className="text-xs font-mono transition-colors"
+              style={{ color: showCode ? 'var(--accent-purple)' : 'var(--text-muted)' }}
+            >
+              {showCode ? "[ hide code ]" : "[ view code ]"}
+            </button>
+          </div>
+          <div className="monad-card p-6">
+            <LiveDemo />
+          </div>
+        </div>
+
+        {/* Code */}
+        {showCode && (
+          <div className="mb-10">
+            <CodeComparison />
+          </div>
+        )}
+
+        {/* Stripe divider */}
+        <div className="stripe-divider my-10" />
+
+        {/* Why */}
+        <div>
+          <div className="badge-purple mb-8">Why</div>
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { title: "Simpler code", desc: "One call, no polling loop or retry logic" },
+              { title: "Atomic confirmation", desc: "Know tx succeeded before your function returns" },
+              { title: "Fewer RPC calls", desc: "1 call vs 3-10+, less rate limiting risk" },
+              { title: "Real execution", desc: "Not a sequencer promise, actual execution result" },
+            ].map((item) => (
+              <div key={item.title} className="monad-card p-5">
+                <div className="relative z-10">
+                  <div className="text-sm font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
+                    {item.title}
+                  </div>
+                  <div className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                    {item.desc}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Footer spacer */}

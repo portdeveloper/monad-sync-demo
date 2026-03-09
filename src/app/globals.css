@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --bg-primary: #0c0c0e;
-  --bg-card: #131318;
+  --bg-primary: #141418;
+  --bg-card: #0c0c0f;
   --border-subtle: #2a2a34;
   --border-medium: #3a3a48;
   --accent-purple: #8b7dff;
@@ -99,16 +99,6 @@ body {
   position: relative;
 }
 
-.monad-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, rgba(50, 50, 65, 0.25) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(50, 50, 65, 0.25) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-}
 
 /* Dot decoration on card corners */
 .dot-corners {
