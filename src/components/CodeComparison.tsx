@@ -4,10 +4,14 @@ const traditionalCode = `const hash = await walletClient.sendRawTransaction({
   serializedTransaction,
 });
 
-// poll for receipt
-const receipt = await publicClient.waitForTransactionReceipt({
-  hash,
-});`;
+// poll eth_getTransactionReceipt until receipt is available
+let receipt = null;
+while (!receipt) {
+  receipt = await publicClient.request({
+    method: "eth_getTransactionReceipt",
+    params: [hash],
+  });
+}`;
 
 const syncCode = `// single call - receipt returned directly
 const receipt = await walletClient.sendRawTransactionSync({
