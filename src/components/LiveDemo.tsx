@@ -345,6 +345,15 @@ export function LiveDemo() {
             <div className="flex items-center gap-2">
               <span className="text-xs font-mono" style={{ color: 'var(--text-dim)' }}>address</span>
               <code className="text-xs font-mono" style={{ color: 'var(--text-secondary)' }}>{address}</code>
+              <button
+                onClick={() => navigator.clipboard.writeText(address!)}
+                className="text-xs font-mono transition-colors cursor-pointer"
+                style={{ color: 'var(--text-dim)' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent-purple)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-dim)')}
+              >
+                copy
+              </button>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs font-mono" style={{ color: 'var(--text-dim)' }}>balance</span>
@@ -370,31 +379,30 @@ export function LiveDemo() {
         )}
 
         {/* Action Buttons */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 flex-wrap">
           <button
             onClick={() => runDemo("traditional")}
             disabled={isRunning || !isConnected}
-            className="h-9 px-4 text-sm font-mono border transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
-            style={{ borderColor: 'var(--border-medium)', color: 'var(--text-secondary)' }}
+            className="h-8 px-3 text-xs font-mono rounded transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer hover:opacity-80"
+            style={{ background: 'var(--border-medium)', color: 'var(--text-secondary)' }}
           >
             traditional
           </button>
           <button
             onClick={() => runDemo("sync")}
             disabled={isRunning || !isConnected}
-            className="h-9 px-4 text-sm font-mono border transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
-            style={{ borderColor: 'var(--border-medium)', color: 'var(--text-secondary)' }}
+            className="h-8 px-3 text-xs font-mono rounded transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer hover:opacity-80"
+            style={{ background: 'var(--border-medium)', color: 'var(--text-secondary)' }}
           >
             sync
           </button>
           <button
             onClick={runBoth}
             disabled={isRunning || !isConnected}
-            className="h-9 px-4 text-sm font-mono border transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+            className="h-8 px-3 text-xs font-mono rounded transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer hover:opacity-80"
             style={{
-              borderColor: 'var(--accent-purple-dim)',
-              color: 'var(--accent-purple)',
-              background: 'rgba(124, 108, 255, 0.08)'
+              background: 'var(--accent-purple)',
+              color: '#fff',
             }}
           >
             {isRunning && !benchmarkProgress ? "running..." : "compare both"}
@@ -402,8 +410,8 @@ export function LiveDemo() {
           <button
             onClick={runBenchmark}
             disabled={isRunning || !isConnected}
-            className="h-9 px-4 text-sm font-mono border transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
-            style={{ borderColor: 'var(--border-medium)', color: 'var(--text-muted)' }}
+            className="h-8 px-3 text-xs font-mono rounded transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer hover:opacity-80"
+            style={{ background: 'var(--border-medium)', color: 'var(--text-muted)' }}
           >
             {benchmarkProgress || "benchmark 10x"}
           </button>
