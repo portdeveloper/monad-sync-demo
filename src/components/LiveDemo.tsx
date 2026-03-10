@@ -112,7 +112,15 @@ export function LiveDemo() {
 
     const start = performance.now();
     const hash = await walletClient.sendRawTransaction({ serializedTransaction: serialized });
-    await publicClient.waitForTransactionReceipt({ hash });
+
+    // Poll eth_getTransactionReceipt directly
+    while (true) {
+      const receipt = await publicClient.request({
+        method: "eth_getTransactionReceipt",
+        params: [hash],
+      });
+      if (receipt) break;
+    }
     const networkTime = performance.now() - start;
 
     return {
