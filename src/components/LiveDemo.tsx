@@ -3,9 +3,9 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { createWalletClient, createPublicClient, http, formatEther, type WalletClient, type PublicClient } from "viem";
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
-import { monad } from "viem/chains";
+import { monadTestnet } from "viem/chains";
 
-const RPC_URL = "https://rpc-mainnet.monadinfra.com";
+const RPC_URL = "https://testnet-rpc.monad.xyz";
 
 function parseError(err: Error): string {
   const msg = err.message || String(err);
@@ -54,11 +54,11 @@ export function LiveDemo() {
       const acc = privateKeyToAccount(privateKey as `0x${string}`);
       const wallet = createWalletClient({
         account: acc,
-        chain: monad,
+        chain: monadTestnet,
         transport: http(RPC_URL),
       });
       const pub = createPublicClient({
-        chain: monad,
+        chain: monadTestnet,
         transport: http(RPC_URL),
       });
       setIsValidKey(true);
@@ -104,7 +104,7 @@ export function LiveDemo() {
 
     const request = await walletClient.prepareTransactionRequest({
       account,
-      chain: monad,
+      chain: monadTestnet,
       to: address,
       value: 0n,
     });
@@ -128,7 +128,7 @@ export function LiveDemo() {
 
     const request = await walletClient.prepareTransactionRequest({
       account,
-      chain: monad,
+      chain: monadTestnet,
       to: address,
       value: 0n,
     });
@@ -292,7 +292,7 @@ export function LiveDemo() {
               </div>
               {result.txHash && (
                 <a
-                  href={`https://explorer.monad.xyz/tx/${result.txHash}`}
+                  href={`https://testnet.monadexplorer.com/tx/${result.txHash}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs mt-3 block font-mono transition-colors"
@@ -532,7 +532,7 @@ export function LiveDemo() {
           timing excludes tx preparation/signing. measures pure network latency only.
         </p>
         <p className="text-xs font-mono" style={{ color: '#8b7530' }}>
-          This demo runs on Monad mainnet. Transactions use real MON.
+          This demo runs on Monad testnet. Transactions use testnet MON.
         </p>
       </div>
     </div>
