@@ -5,7 +5,7 @@ import { createWalletClient, createPublicClient, http, formatEther, type WalletC
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
 import { monadTestnet } from "viem/chains";
 
-const RPC_URL = "https://testnet-rpc.monad.xyz";
+const RPC_URL = "https://rpc-testnet.monadinfra.com";
 
 function parseError(err: Error): string {
   const msg = err.message || String(err);

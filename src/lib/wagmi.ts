@@ -7,7 +7,7 @@ export const config = getDefaultConfig({
   projectId: "YOUR_WALLETCONNECT_PROJECT_ID", // Get one at https://cloud.walletconnect.com
   chains: [monadTestnet],
   transports: {
-    [monadTestnet.id]: http("https://testnet-rpc.monad.xyz"),
+    [monadTestnet.id]: http("https://rpc-testnet.monadinfra.com"),
   },
   ssr: true,
 });
